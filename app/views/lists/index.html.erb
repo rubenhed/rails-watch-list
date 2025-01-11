@@ -1,0 +1,17 @@
+<% @lists.each do |list| %>
+  <p>
+    <%= link_to list.name, list_path(list) %>
+    <br>
+    <% if list.bookmarks.any? %>
+      <p>Comments:</p>
+      <% list.bookmarks.each do |bookmark| %>
+        <% movie = Movie.find(bookmark.movie_id) %>
+        <p class="fw-bold my-0"><%= movie.title %>, <%= movie.rating %></p>
+        <p class="my-0"><%= bookmark.comment %></p>
+      <% end %>
+    <% end %>
+    <br>
+    <%= link_to "New Bookmark", new_list_bookmark_path(list), class: 'btn btn-primary' %>
+  </p>
+  <br>
+<% end %>

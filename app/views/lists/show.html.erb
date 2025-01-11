@@ -1,0 +1,12 @@
+<p class="text-decoration-underline"><%= @list.name %></p>
+
+<% if @list.bookmarks.any? %>
+  <p>Comments:</p>
+  <% @list.bookmarks.each do |bookmark| %>
+    <% movie = Movie.find(bookmark.movie_id) %>
+    <p class="fw-bold my-0"><%= movie.title %>, <%= movie.rating %></p>
+    <p class="my-0"><%= bookmark.comment %></p>
+    <%= link_to "Destroy", bookmark_path(bookmark), data: { confirm: 'Are you sure?', "turbo-method": :delete },
+    class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
